@@ -449,7 +449,6 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
                     promptPrint("Phrase to scramble?\n(Enter to quit)");
                     phrase = nextLine();
                 }
-                promptPrint("");
                 initGame("end");
             }
         }).start();
@@ -461,8 +460,8 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
           running = true;
           CURRENT_LABEL = label;
        } else { // return to main menu - game has ended
-          running = false;
           promptPrint("");
+          running = false;
           setWaitingForBoolean(false);
           CURRENT_LABEL = "What would you like to play next?";
        }
