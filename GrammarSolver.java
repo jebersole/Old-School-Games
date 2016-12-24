@@ -58,17 +58,7 @@ public class GrammarSolver {
         if (!symbol.contains(" ") && !symbol.contains("|") && !grammar.containsKey(symbol)) {
             return symbol; // symbol is a word, a terminal
         } else {
-            String[] parts = {};
-            if (symbol.contains("|")) {
-                parts = symbol.split("[|]");
-                if (symbol.contains(" ")) { // the notation can indicate "or" with both pipes and spaces
-                    parts = parts[random(parts)].split("[ \t]+");
-                }
-            } else if (symbol.contains(" ")) {
-                parts = symbol.split("[ \t]+");
-            } else {
-                parts = new String[] { "" + symbol }; // only one, nonterminal symbol
-            }
+            String[] parts = split(symbol);
             if (grammar.containsKey(parts[0])) { // symbol is a part of speech, a nonterminal
                 for (int i = 0; i < parts.length; i++) {
                     symbol = grammar.get(parts[i].toLowerCase());
@@ -80,6 +70,22 @@ public class GrammarSolver {
         }
         return result;
     }
+
+   // split string based on notation pattern
+   private String[] split(String symbol) {
+      String[] parts = {};
+      if (symbol.contains("|")) {
+          parts = symbol.split("[|]");
+          if (symbol.contains(" ")) { // the notation can indicate "or" with both pipes and spaces
+             parts = parts[random(parts)].split("[ \t]+");
+          }
+      } else if (symbol.contains(" ")) {
+          parts = symbol.split("[ \t]+");
+      } else {
+          parts = new String[] { "" + symbol }; // only one, nonterminal symbol
+      }
+      return parts;
+   }
 
     // chooses a random word/part of speech
     private int random(String[] parts) {
