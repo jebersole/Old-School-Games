@@ -67,9 +67,7 @@ public class GrammarSolver {
             } else if (symbol.contains(" ")) {
                 parts = symbol.split("[ \t]+");
             } else {
-                parts = new String[] {
-                    "" + symbol
-                }; // only one, nonterminal symbol
+                parts = new String[] { "" + symbol }; // only one, nonterminal symbol
             }
             if (grammar.containsKey(parts[0])) { // symbol is a part of speech, a nonterminal
                 for (int i = 0; i < parts.length; i++) {

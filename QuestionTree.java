@@ -33,39 +33,27 @@ public class QuestionTree {
     private void play(QuestionNode current) {
         boolean answer = false;
         if (current.left == null && current.right == null) { // build new tree
-            if (!ui.getRunning()) {
-                return;
-            } // true if user has pressed "End Game"
+            if (!ui.getRunning()) { return; } // true if user has pressed "End Game"
             ui.promptPrint("Would your object happen to be a " + current.data + "? ");
             if (ui.getRunning() && ui.nextBoolean()) { // user answered "Yes"
                 ui.promptPrint("I win!");
                 won++; // computer wins
             } else { // user says "No," so update tree, resulting in computer "learning"
-                if (!ui.getRunning()) {
-                    return;
-                }
+                if (!ui.getRunning()) { return; }
                 ui.promptPrint("I lose. What is your object? ");
                 String object = ui.nextLine();
-                if (!ui.getRunning()) {
-                    return;
-                }
+                if (!ui.getRunning()) { return; }
                 ui.promptPrint("Type a yes/no question to distinguish your item from " +
                     current.data + ": ");
-                if (!ui.getRunning()) {
-                    return;
-                }
+                if (!ui.getRunning()) { return; }
                 String question = ui.nextLine();
                 ui.promptPrint("And what is the answer for your object? ");
-                if (!ui.getRunning()) {
-                    return;
-                }
+                if (!ui.getRunning()) { return; }
                 answer = ui.nextBoolean();
                 current = addQA(question, answer, object, current);
             }
         } else { // continue adding to existing tree
-            if (!ui.getRunning()) {
-                return;
-            }
+           if (!ui.getRunning()) { return; }
             ui.promptPrint(current.data + " ");
             if (ui.nextBoolean()) {
                 play(current.left);

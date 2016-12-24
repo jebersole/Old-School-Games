@@ -230,16 +230,12 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
 
     /** Outputs the given text onto the GUI. */
     public void print(String text) {
-        if (!running) {
-            return;
-        }
+        if (!running) { return; }
         messageLabel.setText(text);
     }
 
     public void promptPrint(String text) {
-        if (!running) {
-            return;
-        }
+        if (!running) { return; }
         promptLabel.setText(text);
     }
 
@@ -252,28 +248,16 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
         new Thread(new Runnable() {
             public void run() {
                 QuestionTree game = new QuestionTree(ui);
-                running = true;
-                CURRENT_LABEL = "Twenty Questions";
-                doEnabling();
-                playMusic();
+                initGame("Twenty Questions");
                 saveLoad(false, game);
-                if (!running) {
-                    return;
-                }
+                if (!running) { return; }
                 do {
                     game.play();
                     print(PLAY_AGAIN_MESSAGE);
                 } while (running && nextBoolean());
-                if (!running) {
-                    return;
-                }
+                if (!running) { return; }
                 saveLoad(true, game);
-                promptPrint("");
-                CURRENT_LABEL = "What would you like to play next?";
-                setWaitingForBoolean(false);
-                running = false;
-                playMusic();
-                doEnabling();
+                initGame("end");
             }
         }).start();
     }
@@ -281,10 +265,7 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
     public void runSentence() {
         new Thread(new Runnable() {
             public void run() {
-                running = true;
-                CURRENT_LABEL = "Random Sentence";
-                doEnabling();
-                playMusic();
+                initGame("Random Sentence");
                 ArrayList<String> lines = null;
                 try {
                     lines = readLines(SENTENCE_FILE);
@@ -305,9 +286,7 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
                             promptPrint("Please enter a number.");
                         }
                     }
-                    if (!running) {
-                        return;
-                    }
+                    if (!running) { return; }
                     String result = "";
                     for (int i = 0; i < num; i++) {
                         String sentence = solver.generate();
@@ -315,12 +294,7 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
                     }
                     print(result);
                 } while (running);
-                promptPrint("");
-                CURRENT_LABEL = "What would you like to play next?";
-                setWaitingForBoolean(false);
-                running = false;
-                doEnabling();
-                playMusic();
+                initGame("end");
             }
         }).start();
     }
@@ -329,11 +303,7 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
     public void runHangman() {
         new Thread(new Runnable() {
             public void run() {
-                running = true;
-                CURRENT_LABEL = "Evil Hangman";
-                doEnabling();
-                playMusic();
-                print("Welcome to Evil Hangman.");
+                initGame("Evil Hangman");
                 // open the dictionary file and read dictionary into an ArrayList
                 InputStream in = getClass().getClassLoader().getResourceAsStream(HDICTIONARY_FILE);
                 Scanner input;
@@ -369,9 +339,7 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
                             promptPrint("Please enter a number.");
                         }
                     }
-                    if (!running) {
-                        return;
-                    }
+                    if (!running) { return; }
                     // set up the HangmanManager and start the game
                     HangmanManager hangman;
                     try {
@@ -400,8 +368,7 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
                                 } else if (count == 1) {
                                     message = "Yes, there is one " + ch;
                                 } else {
-                                    message = "Yes, there are " + count + " " + ch +
-                                        "'s";
+                                    message = "Yes, there are " + count + " " + ch + "'s";
                                 }
                             } catch (Exception exc) {
                                 // IllegalArgumentException: "You've already guessed that!"
@@ -414,9 +381,7 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
                                 }
                             }
                         }
-                        if (!running) {
-                            return;
-                        }
+                        if (!running) { return; }
                         //show results
                         String answer = hangman.words().iterator().next();
                         print("The answer was: " + answer);
@@ -427,12 +392,7 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
                         }
                     }
                 } while (nextBoolean());
-                promptPrint("");
-                CURRENT_LABEL = "What would you like to play next?";
-                setWaitingForBoolean(false);
-                running = false;
-                playMusic();
-                doEnabling();
+                initGame("end");
             }
         }).start();
     }
@@ -441,7 +401,6 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
     public void runAnagrams(UserInterface ui) {
         new Thread(new Runnable() {
             public void run() {
-                running = true;
                 InputStream in = getClass().getClassLoader().getResourceAsStream(ADICTIONARY_FILE);
                 Scanner input;
                 try {
@@ -463,15 +422,10 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
                     print(e.getMessage());
                     return;
                 }
-                CURRENT_LABEL = "Anagrams";
-                doEnabling();
-                playMusic();
-                print("Welcome to Anagrams.");
+                initGame("Anagrams");
                 promptPrint("Phrase to scramble?\n(Enter to quit)");
                 String phrase = nextLine();
-                if (!running) {
-                    return;
-                }
+                if (!running) { return; }
                 // loop to get/solve each phrase
                 while (phrase.length() > 0) {
                     Set<String> allWords;
@@ -491,18 +445,29 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
                     promptPrint("");
                     print("Computing...");
                     ana.print(phrase); //  all anagrams of phrase
-
                     // get next phrase to solve
                     promptPrint("Phrase to scramble?\n(Enter to quit)");
                     phrase = nextLine();
                 }
                 promptPrint("");
-                CURRENT_LABEL = "What would you like to play next?";
-                running = false;
-                doEnabling();
-                playMusic();
+                initGame("end");
             }
         }).start();
+    }
+
+    // updates game state to reflect current game
+    private void initGame(String label) {
+       if (label.length() > 3) { // not "end" game
+          running = true;
+          CURRENT_LABEL = label;
+       } else { // return to main menu - game has ended
+          running = false;
+          promptPrint("");
+          setWaitingForBoolean(false);
+          CURRENT_LABEL = "What would you like to play next?";
+       }
+       doEnabling();
+       playMusic();
     }
 
     /** Waits for the user to press Yes or No and returns the boolean. */
@@ -586,9 +551,7 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
 
     // private helper for asking a question with the given initial text
     private String nextLine(String defaultValue) {
-        if (!running) {
-            return "";
-        }
+        if (!running) { return ""; }
         inputField.setText(defaultValue);
         setWaitingForString(true);
         try {
