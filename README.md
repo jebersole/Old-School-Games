@@ -3,6 +3,7 @@
 ![Old School Games](osk.png?raw=true)
 
 This program combines several small text games with a graphical interface.
+
 One of these is called Evil Hangman. This is like normal hangman, except here, the computer tries not
 to choose a word for you to guess until it absolutely has to. Instead, it chooses a set of words
 which do not contain the letters you’ve guessed. Eventually, if you’re persistent (hint: choose
@@ -24,4 +25,6 @@ Random Sentence does just that, computer-generated sentences.
 Both of these use recursion, which may be of interest when perusing the source.
 
 To play, simply clone, then compile and run `OskMain.java`.
+Note: there have been issues running audio clips with the Linux openjdk, so the official
+Oracle jdk is recommended.
 Thanks to Marty Stepp of Stanford for the ideas and many GUI components.
