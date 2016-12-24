@@ -1,0 +1,11 @@
+<s>::=<np> <vp>
+<np>::=<dp> <adjp> <n>|<pn>
+<dp>::=the|a
+<adjp>::=<adj>|<adv> <adj>
+<adv>::=extremely|wonderfully|incredibly|pretentiously|unbelievably|amazingly|boringly
+<adj>::=big|fat|green|wonderful|faulty|subliminal|pretentious|unbelievable|incredible|fantastic|hallucinogenic|excellent|unspeakable|delinquent|aspiring|apocalyptic|exquisite|unethical|marvelous
+<n>::=dog|cat|man|university|father|mother|child|television|apricot|car|pothole|snowdrift|politician|host|guest|trainwreck|speaker|elephant|giraffe|wrestler|janitor
+<pn>::=John|Jane|Sally|Spot|Fred|Elmo|Elvis|Rita|Clyde|George|Janet|Rufus|Bob|Joe|Michelle|Francisco|Cinderella|Barbarella|Leonardo|Donatello|Santa|Sheryl
+<vp>::=<tv> <np>|<iv>
+<tv>::=hit|honored|kissed|helped|ate|applauded|dismissed|installed|uninstalled|debugged|coded|developed|lectured|greeted|emailed|called|inspired|created|delivered
+<iv>::=died|collapsed|laughed|wept|exclaimed|smiled|jumped|ran|walked|drove|flew|snickered|yelled|shouted|whispered|coded|wrote|grew|thought|dreamed|meowed|barked
