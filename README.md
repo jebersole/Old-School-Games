@@ -24,7 +24,7 @@ answers are provided.
 Random Sentence does just that, computer-generated sentences.
 Both of these use recursion, which may be of interest when perusing the source.
 
-To play, simply clone, then compile and run `OskMain.java`.
+To play, simply clone, then compile and run `OskMain.java`. Alternatively, an executable .jar is available [here](https://drive.google.com/open?id=0B54awCBW9Yx-UEFvNXdDY3Q0ZWs).
 Note: there have been issues running audio clips with the Linux openjdk, so the official
 Oracle jdk is recommended.
 Thanks to Marty Stepp of Stanford for the ideas and many GUI components.
