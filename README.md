@@ -1,6 +1,6 @@
 # Old School Games
 
-![Old School Games](osk.png?raw=true)
+![Old School Games](assets/osk.png?raw=true)
 
 This program combines several small text games with a graphical interface.
 

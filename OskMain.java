@@ -40,9 +40,9 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
     private static final boolean MUSIC = true;
     private static final boolean SOUNDFX = true;
 
-    private static final String ADICTIONARY_FILE = "adictionary.txt"; // Anagrams
-    private static final String HDICTIONARY_FILE = "hdictionary.txt"; // Hangman
-    private static final String SENTENCE_FILE = "sentence.txt"; // Random Sentence
+    private static final String ADICTIONARY_FILE = "assets/adictionary.txt"; // Anagrams
+    private static final String HDICTIONARY_FILE = "assets/hdictionary.txt"; // Hangman
+    private static final String SENTENCE_FILE = "assets/sentence.txt"; // Random Sentence
 
     private static final String MUSIC_MESSAGE = "Music";
     private static final String SFX_MESSAGE = "Sound";
@@ -54,11 +54,11 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
     // Possibilities: What would you like to play next?, Anagrams, Evil Hangman, Random Sentence, Twenty Questions
 
     // file names, paths, URLs
-    private static final String SAVE_DEFAULT_FILE_NAME = "animals.txt";
-    private static final String GAME_MUSIC_FILENAME = "forest.wav";
-    private static final String TITLE_MUSIC_FILENAME = "gameland.wav";
-    private static String BACKGROUND_IMAGE_FILE_NAME = "astroblast.jpg";
-    private static String SOUND_FILE_NAME = "blip.wav";
+    private static final String SAVE_DEFAULT_FILE_NAME = "assets/animals.txt";
+    private static final String GAME_MUSIC_FILENAME = "assets/forest.wav";
+    private static final String TITLE_MUSIC_FILENAME = "assets/gameland.wav";
+    private static String BACKGROUND_IMAGE_FILE_NAME = "assets/astroblast.jpg";
+    private static String SOUND_FILE_NAME = "assets/blip.wav";
 
     // visual elements
     private static final Font FONT = new Font("SansSerif", Font.BOLD, 18);
@@ -97,7 +97,7 @@ public class OskMain implements ActionListener, KeyListener, Runnable, UserInter
 
         osk = new JLabel();
         osk.setLayout(null);
-        ImageIcon img = new ImageIcon(ClassLoader.getSystemResource("icon.png"));
+        ImageIcon img = new ImageIcon(ClassLoader.getSystemResource("assets/icon.png"));
         frame.setIconImage(img.getImage());
         osk.setIcon(new ImageIcon(ClassLoader.getSystemResource(BACKGROUND_IMAGE_FILE_NAME)));
 
